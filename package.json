@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@fleekhq/fleek-storage-js": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "twitter-lite": "^0.14.0"
+  }
 }
