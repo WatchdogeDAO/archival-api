@@ -12,6 +12,7 @@
   "dependencies": {
     "@fleekhq/fleek-storage-js": "^1.0.2",
     "dotenv": "^8.2.0",
+    "request": "^2.88.2",
     "twitter-lite": "^0.14.0"
   }
 }

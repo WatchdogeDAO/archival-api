@@ -1,4 +1,5 @@
 const Twitter = require('twitter-lite');
+const { uploadFromUrl } = require('./storage');
 
 const runBot = () => {
   const client = new Twitter({
@@ -22,8 +23,7 @@ const runBot = () => {
     const variants = targetTweet.extended_entities.media[0].video_info.variants;
     const highestBitrateVid = getHighestBitrate(variants);
     const videoUrl = variants[highestBitrateVid].url;
-
-    console.log(videoUrl);
+    uploadFromUrl(videoUrl);
   };
 
   const stream = client
@@ -50,8 +50,6 @@ const getHighestBitrate = variants => {
     return highestIndex;
   }
 };
-
-const getVideoNameFromUrl = url => url.slice(-27, -7);
 
 module.exports = {
   runBot,
