@@ -34,15 +34,16 @@ const uploadFromUrl = async url => {
 
 const getFileName = url => url.slice(-27, -7);
 
-// const listFiles = async () => {
-//   const files = await fleekStorage.listFiles({
-//     apiKey: process.env.FLEEK_API_KEY,
-//     apiSecret: process.env.FLEEK_API_SECRET,
-//     getOptions: ['bucket', 'key', 'hash', 'publicUrl'],
-//   });
-//   console.log(files);
-// };
+const listArchive = async () => {
+  const archive = await fleekStorage.listFiles({
+    apiKey: process.env.FLEEK_API_KEY,
+    apiSecret: process.env.FLEEK_API_SECRET,
+    getOptions: ['bucket', 'key', 'hash', 'publicUrl'],
+  });
+  return archive;
+};
 
 module.exports = {
   uploadFromUrl,
+  listArchive,
 };
