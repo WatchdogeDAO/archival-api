@@ -1,7 +1,9 @@
 const Twitter = require('twitter-lite');
 const { uploadFromUrl } = require('./storage');
+const { saveTweet } = require('./db.js');
 
 const runBot = () => {
+  console.log('Bot Starting');
   const client = new Twitter({
     consumer_key: process.env.CONSUMER_API_KEY,
     consumer_secret: process.env.CONSUMER_SECRET,
@@ -12,6 +14,7 @@ const runBot = () => {
   const parameters = { follow: '1280934313073299456', tweet_mode: 'extended' };
 
   const handleIncomingTweet = async tweet => {
+    console.log('New Tweet:', tweet);
     // TODO: Check that it was an archive request.
     // TODO: Check if the person is member of the dao.
     // TODO: Check if the target tweet is a video.
@@ -20,10 +23,17 @@ const runBot = () => {
       id: tweet.in_reply_to_status_id_str,
       tweet_mode: 'extended',
     });
+    console.log('Target tweet:', targetTweet.full_text);
     const variants = targetTweet.extended_entities.media[0].video_info.variants;
     const highestBitrateVid = getHighestBitrate(variants);
     const videoUrl = variants[highestBitrateVid].url;
-    uploadFromUrl(videoUrl);
+    console.log('Got the video URL:', videoUrl);
+    const videoHash = await uploadFromUrl(videoUrl);
+    console.log('Got the video hash:', videoHash);
+    saveTweet({
+      text: targetTweet.full_text,
+      hash: videoHash,
+    });
   };
 
   const stream = client

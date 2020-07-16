@@ -1,35 +1,46 @@
-const request = require('request');
+const axios = require('axios');
 const fs = require('fs');
 const fleekStorage = require('@fleekhq/fleek-storage-js');
 
 const fileName = 'sample.mp4';
 
-const uploadFromUrl = async url => {
-  const options = {
-    url,
-    method: 'get',
-    encoding: null,
-  };
+async function downloadVideo(url) {
+  const path = fileName;
+  const writer = fs.createWriteStream(path);
 
-  request(options, async (error, response, body) => {
-    if (error) {
-      console.error('error:', error);
-    } else {
-      console.log('Response: StatusCode:', response && response.statusCode);
-      console.log(
-        'Response: Body: Length: %d. Is buffer: %s',
-        body.length,
-        body instanceof Buffer
-      );
-      const uploadedFile = await fleekStorage.upload({
-        apiKey: process.env.FLEEK_API_KEY,
-        apiSecret: process.env.FLEEK_API_SECRET,
-        key: 'test.mp4',
-        data: body,
-      });
-      console.log('I give you the', uploadedFile);
-    }
+  const response = await axios({
+    url,
+    method: 'GET',
+    responseType: 'stream',
   });
+
+  response.data.pipe(writer);
+
+  return new Promise((resolve, reject) => {
+    writer.on('finish', resolve);
+    writer.on('error', reject);
+  });
+}
+
+const uploadFromUrl = async url => {
+  try {
+    await downloadVideo(url);
+  } catch (e) {
+    console.log("Couldn't download video.", e);
+  }
+
+  try {
+    const data = fs.readFileSync(fileName);
+    const uploadedFile = await fleekStorage.upload({
+      apiKey: process.env.FLEEK_API_KEY,
+      apiSecret: process.env.FLEEK_API_SECRET,
+      key: fileName,
+      data: data,
+    });
+    return uploadedFile.hash;
+  } catch (e) {
+    throw new Error('Failed pinning file.');
+  }
 };
 
 const getFileName = url => url.slice(-27, -7);
