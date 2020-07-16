@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 var cors = require('cors');
 const { runBot } = require('./bot');
+const { getTweets } = require('./db');
 
 dotenv.config();
 
@@ -10,8 +11,9 @@ const port = 3001;
 
 app.use(cors());
 
-app.get('/videos', async (req, res) => {
-  // Return tweets from db
+app.get('/tweets', async (req, res) => {
+  const tweets = getTweets();
+  res.json(tweets);
 });
 
 runBot();

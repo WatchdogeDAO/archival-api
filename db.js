@@ -13,7 +13,7 @@ const saveTweet = tweet => {
 };
 
 const getTweets = () => {
-  const tweets = db.get('tweets');
+  const tweets = db.getState();
   return tweets;
 };
 
