@@ -1,0 +1,38 @@
+[
+  {
+    "inputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "name": "archivers",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "twitterId", "type": "string" }
+    ],
+    "name": "addArchiver",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "twitterId", "type": "string" }
+    ],
+    "name": "removeArchiver",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "twitterId", "type": "string" }
+    ],
+    "name": "isArchiver",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  }
+]

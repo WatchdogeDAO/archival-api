@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon index.js --ignore db.json"
   },
   "keywords": [],
@@ -20,6 +20,10 @@
     "lowdb": "^1.0.0",
     "nodemon": "^2.0.4",
     "request": "^2.88.2",
-    "twitter-lite": "^0.14.0"
+    "twitter-lite": "^0.14.0",
+    "web3": "^1.2.10"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }

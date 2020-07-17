@@ -2,10 +2,10 @@ const axios = require('axios');
 const fs = require('fs');
 const fleekStorage = require('@fleekhq/fleek-storage-js');
 
-const fileName = 'sample.mp4';
+const tmpFileName = 'tmp.mp4';
 
 async function downloadVideo(url) {
-  const path = fileName;
+  const path = 'tmp.mp4';
   const writer = fs.createWriteStream(path);
 
   const response = await axios({
@@ -23,6 +23,8 @@ async function downloadVideo(url) {
 }
 
 const uploadFromUrl = async url => {
+  const fileName = getFileName(url);
+
   try {
     await downloadVideo(url);
   } catch (e) {
@@ -30,7 +32,7 @@ const uploadFromUrl = async url => {
   }
 
   try {
-    const data = fs.readFileSync(fileName);
+    const data = fs.readFileSync(tmpFileName);
     const uploadedFile = await fleekStorage.upload({
       apiKey: process.env.FLEEK_API_KEY,
       apiSecret: process.env.FLEEK_API_SECRET,
@@ -45,16 +47,6 @@ const uploadFromUrl = async url => {
 
 const getFileName = url => url.slice(-27, -7);
 
-const listArchive = async () => {
-  const archive = await fleekStorage.listFiles({
-    apiKey: process.env.FLEEK_API_KEY,
-    apiSecret: process.env.FLEEK_API_SECRET,
-    getOptions: ['bucket', 'key', 'hash', 'publicUrl'],
-  });
-  return archive;
-};
-
 module.exports = {
   uploadFromUrl,
-  listArchive,
 };

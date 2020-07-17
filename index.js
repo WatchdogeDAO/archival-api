@@ -1,8 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 var cors = require('cors');
-const { runBot } = require('./bot');
-const { getTweets } = require('./db');
+const { runBot } = require('./src/bot');
+const { getTweets } = require('./src/db');
 
 dotenv.config();
 
