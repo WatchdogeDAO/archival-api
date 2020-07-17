@@ -33,6 +33,9 @@ const runBot = () => {
     saveTweet({
       text: targetTweet.full_text,
       hash: videoHash,
+      archiverHandle: tweet.user.screen_name,
+      tweetUrl: `https://twitter.com/${targetTweet.user.screen_name}/status/${targetTweet.id_str}`,
+      date: targetTweet.created_at,
     });
   };
 
