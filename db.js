@@ -7,9 +7,12 @@ const db = low(adapter);
 db.defaults({ tweets: [] }).write();
 
 const saveTweet = tweet => {
-  console.log('Saving tweet');
-  db.get('tweets').push(tweet).write();
-  console.log('Done');
+  const tweetData = {
+    ...tweet,
+    id: db.getState().tweets.length + 1,
+  };
+
+  db.get('tweets').push(tweetData).write();
 };
 
 const getTweets = () => {
