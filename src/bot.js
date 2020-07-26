@@ -3,6 +3,8 @@ const { uploadFromUrl } = require('./storage');
 const { saveTweet } = require('./db');
 const abi = require('../abis/archivers.json');
 const Web3 = require('web3');
+const { connect } = require('@aragon/connect');
+const { CuratedList } = require('connect-thegraph-curated-list');
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
@@ -127,13 +129,28 @@ const isArchiveRequest = tweet => {
 
 const isApprovedArchiver = async tweet => {
   try {
-    const instance = new web3.eth.Contract(abi, process.env.ARCHIVERS_ADDRESS);
-    const isArchiver = await instance.methods
-      .isArchiver(tweet.user.id_str)
-      .call();
-    return isArchiver ? true : false;
+    const org = await connect(
+      '0x5005e04882845575f7433796B0DF0858e901B544',
+      'thegraph',
+      {
+        chainId: 4,
+      }
+    );
+    const apps = await org.apps();
+    const { address } = apps.find(app => app.appName.includes('list.open'));
+    const curatedList = await new CuratedList(
+      address,
+      'https://api.thegraph.com/subgraphs/name/mauerv/aragon-registry-rinkeby-staging'
+    );
+    const members = await curatedList.members();
+
+    const selectedMember = members.find(
+      member => member.id === tweet.user.id_str
+    );
+    const isArchiver = selectedMember !== undefined;
+    return isArchiver;
   } catch (e) {
-    console.log(`Couldn't check the archivers smart contract, ${e}`);
+    console.log("Couldn't process member", e);
     return false;
   }
 };

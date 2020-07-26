@@ -31,7 +31,6 @@ app.post('/pin', async (req, res) => {
         pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
       },
     });
-    console.log(response.data.ipfsHash);
     res.json(response.data);
   } catch (e) {
     res.status(500).send(e);
