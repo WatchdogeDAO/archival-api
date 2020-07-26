@@ -17,7 +17,8 @@ const TWEET_IS_NOT_VIDEO =
   "I'm sorry, there doesn't seem to be a video that I can archive. Mention me with '@watchdogedao #archive' as a reply to relevant videos.";
 const NOT_APPROVED_ARCHIVER =
   "I'm sorry, you need to be approved before you can archive tweets.";
-
+const VIDEO_SAVED =
+  'The video was stored successfully on permanent and stoppable storage through IPFS/Filecoin. Check it out at https://watchdogedao.com';
 /**
  * Main function to run the bot.
  */
@@ -81,6 +82,7 @@ const runBot = () => {
         date: targetTweet.created_at,
       });
       console.log(`Tweet ${targetTweet.id_str} Saved successfuly to the DB.`);
+      return reply(VIDEO_SAVED, tweet.id_str);
     } catch (e) {
       console.log(`Couldn't save the tweet ${targetTweet.id_str}`);
     }
