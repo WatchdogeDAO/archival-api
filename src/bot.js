@@ -24,19 +24,19 @@ const VIDEO_SAVED =
  */
 const runBot = () => {
   console.log('Bot Starting up...');
-  client = new Twitter({
-    consumer_key: process.env.CONSUMER_API_KEY,
-    consumer_secret: process.env.CONSUMER_SECRET,
-    access_token_key: process.env.ACCESS_TOKEN,
-    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-  });
-
   console.log(
     process.env.CONSUMER_API_KEY,
     process.env.CONSUMER_SECRET,
     process.env.ACCESS_TOKEN,
     process.env.ACCESS_TOKEN_SECRET
   );
+
+  client = new Twitter({
+    consumer_key: process.env.CONSUMER_API_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token_key: process.env.ACCESS_TOKEN,
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+  });
 
   client
     .get('account/verify_credentials')
