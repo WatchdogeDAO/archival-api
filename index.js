@@ -39,6 +39,4 @@ app.post('/pin', async (req, res) => {
 
 runBot();
 
-app.listen(port, () =>
-  console.log(`Archival API listening at http://localhost:${port}`)
-);
+app.listen(port, () => console.log(`Archival API listening in port ${port}`));
