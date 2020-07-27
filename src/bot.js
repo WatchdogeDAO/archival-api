@@ -31,13 +31,6 @@ const runBot = () => {
     access_token_secret: process.env.ACCESS_TOKEN_SECRET,
   });
 
-  client
-    .get('account/verify_credentials')
-    .then(results => {
-      console.log('results', results);
-    })
-    .catch(console.error);
-
   const parameters = { follow: '1280934313073299456', tweet_mode: 'extended' };
 
   const handleIncomingTweet = async tweet => {
