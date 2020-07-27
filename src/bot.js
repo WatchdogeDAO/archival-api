@@ -31,6 +31,13 @@ const runBot = () => {
     access_token_secret: process.env.ACCESS_TOKEN_SECRET,
   });
 
+  console.log(
+    process.env.CONSUMER_API_KEY,
+    process.env.CONSUMER_SECRET,
+    process.env.ACCESS_TOKEN,
+    process.env.ACCESS_TOKEN_SECRET
+  );
+
   const parameters = { follow: '1280934313073299456', tweet_mode: 'extended' };
 
   const handleIncomingTweet = async tweet => {
