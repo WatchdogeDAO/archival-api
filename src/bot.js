@@ -24,17 +24,6 @@ const VIDEO_SAVED =
  */
 const runBot = () => {
   console.log('Bot Starting up...');
-  console.log(
-    typeof process.env.CONSUMER_API_KEY,
-    process.env.CONSUMER_API_KEY,
-    typeof process.env.CONSUMER_SECRET,
-    process.env.CONSUMER_SECRET,
-    typeof process.env.ACCESS_TOKEN,
-    process.env.ACCESS_TOKEN,
-    typeof process.env.ACCESS_TOKEN_SECRET,
-    process.env.ACCESS_TOKEN_SECRET
-  );
-
   client = new Twitter({
     consumer_key: process.env.CONSUMER_API_KEY,
     consumer_secret: process.env.CONSUMER_SECRET,
@@ -106,9 +95,9 @@ const runBot = () => {
     }
   };
 
-  // const stream = client
-  //   .stream('statuses/filter', parameters)
-  //   .on('data', handleIncomingTweet);
+  const stream = client
+    .stream('statuses/filter', parameters)
+    .on('data', handleIncomingTweet);
 };
 
 const getHighestBitrate = variants => {
