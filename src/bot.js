@@ -34,7 +34,7 @@ const runBot = () => {
   const parameters = {
     follow: '1280934313073299456',
     tweet_mode: 'extended',
-    track: '#archiveinipfsplease',
+    track: '@watchdogedao',
   };
 
   const handleIncomingTweet = async tweet => {
