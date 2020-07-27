@@ -16,6 +16,10 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.status(200).send('healthy');
+});
+
 app.get('/tweets', async (req, res) => {
   const tweets = getTweets();
   res.json(tweets);
