@@ -88,9 +88,13 @@ const runBot = () => {
     }
   };
 
-  const stream = client
-    .stream('statuses/filter', parameters)
-    .on('data', handleIncomingTweet);
+  try {
+    const stream = client
+      .stream('statuses/filter', parameters)
+      .on('data', handleIncomingTweet);
+  } catch (e) {
+    throw new Error(`Couln't start listening Twitter API: ${e}`);
+  }
 };
 
 const getHighestBitrate = variants => {

@@ -28,7 +28,7 @@ const uploadFromUrl = async url => {
   try {
     await downloadVideo(url);
   } catch (e) {
-    console.log("Couldn't download video.", e);
+    throw new Error("Couldn't download video.");
   }
 
   try {
