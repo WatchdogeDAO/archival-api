@@ -38,6 +38,13 @@ const runBot = () => {
     process.env.ACCESS_TOKEN_SECRET
   );
 
+  client
+    .get('account/verify_credentials')
+    .then(results => {
+      console.log('results', results);
+    })
+    .catch(console.error);
+
   const parameters = { follow: '1280934313073299456', tweet_mode: 'extended' };
 
   const handleIncomingTweet = async tweet => {
@@ -95,13 +102,9 @@ const runBot = () => {
     }
   };
 
-  try {
-    const stream = client
-      .stream('statuses/filter', parameters)
-      .on('data', handleIncomingTweet);
-  } catch (e) {
-    throw new Error(`Couln't start listening Twitter API: ${e}`);
-  }
+  // const stream = client
+  //   .stream('statuses/filter', parameters)
+  //   .on('data', handleIncomingTweet);
 };
 
 const getHighestBitrate = variants => {
