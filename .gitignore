@@ -2,3 +2,4 @@ node_modules/
 tmp.mp4
 .env
 tmp
+src/db.json
