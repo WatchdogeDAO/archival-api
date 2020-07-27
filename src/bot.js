@@ -31,7 +31,11 @@ const runBot = () => {
     access_token_secret: process.env.ACCESS_TOKEN_SECRET,
   });
 
-  const parameters = { follow: '1280934313073299456', tweet_mode: 'extended' };
+  const parameters = {
+    follow: '1280934313073299456',
+    tweet_mode: 'extended',
+    track: '#archiveinipfsplease',
+  };
 
   const handleIncomingTweet = async tweet => {
     console.log('New tweet received:', tweet.id_str);
