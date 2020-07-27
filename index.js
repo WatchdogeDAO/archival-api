@@ -6,7 +6,9 @@ var cors = require('cors');
 const { runBot } = require('./src/bot');
 const { getTweets } = require('./src/db');
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const app = express();
 const port = process.env.PORT || 3001;
