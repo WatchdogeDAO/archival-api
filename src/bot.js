@@ -16,9 +16,9 @@ let client;
 const TWEET_IS_NOT_VIDEO =
   "I'm sorry, there doesn't seem to be a video that I can archive. Mention me with '@watchdogedao #archive' as a reply to relevant videos.";
 const NOT_APPROVED_ARCHIVER =
-  "I'm sorry, you need to be approved before you can archive tweets.";
+  "I'm sorry, you need to be approved before you can archive tweets. Go to https://watchdogdao.eth.link/ to learn more.";
 const VIDEO_SAVED =
-  'The video was stored successfully on permanent and stoppable storage through IPFS/Filecoin. Check it out at https://watchdogedao.com';
+  'The video was stored successfully on permanent and stoppable storage through IPFS/Filecoin. Check it out at https://watchdogdao.eth.link/';
 /**
  * Main function to run the bot.
  */
