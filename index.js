@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 const { runBot } = require('./src/bot');
-const { getTweets } = require('./src/db');
+const { getTweets, getTweet } = require('./src/db');
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -23,6 +23,11 @@ app.get('/', (req, res) => {
 app.get('/tweets', async (req, res) => {
   const tweets = getTweets();
   res.json(tweets);
+});
+
+app.get('/tweets/:hash', (req, res) => {
+  const tweet = getTweet(req.params.hash);
+  res.json(tweet);
 });
 
 app.post('/pin', async (req, res) => {

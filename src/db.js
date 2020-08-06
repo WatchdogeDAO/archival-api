@@ -20,7 +20,13 @@ const getTweets = () => {
   return tweets;
 };
 
+const getTweet = hash => {
+  const tweet = db.get('tweets').find({ hash }).value();
+  return tweet;
+};
+
 module.exports = {
   saveTweet,
   getTweets,
+  getTweet,
 };

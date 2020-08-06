@@ -3,3 +3,4 @@ tmp.mp4
 .env
 tmp
 src/db.json
+db.json
